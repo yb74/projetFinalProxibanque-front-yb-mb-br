@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +15,7 @@ import { HeaderComponent } from './shared/components/templates/header/header.com
 import { RegisterComponent } from './components/register/register.component';
 import { ClientsFormComponent } from './components/clients/clients-form/clients-form.component';
 import { ConseillersFormComponent } from './components/conseillers/conseillers-form/conseillers-form.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { ConseillersFormComponent } from './components/conseillers/conseillers-f
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
