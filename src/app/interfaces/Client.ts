@@ -1,6 +1,7 @@
 import {Conseiller} from "./Conseiller";
 
 export interface Client {
+  id:number;
   name: string;
   firstName: string;
   adress: string;

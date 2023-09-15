@@ -16,6 +16,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ClientsFormComponent } from './components/clients/clients-form/clients-form.component';
 import { ConseillersFormComponent } from './components/conseillers/conseillers-form/conseillers-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { SpinnerComponent } from './shared/components/UI/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     HeaderComponent,
     RegisterComponent,
     ClientsFormComponent,
-    ConseillersFormComponent
+    ConseillersFormComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
