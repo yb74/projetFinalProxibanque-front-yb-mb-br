@@ -7,15 +7,75 @@
     <app-toast></app-toast>
   </div>
 
-<!--  <div *ngIf="isFormVisible$ | async">-->
-<!--    <app-conseiller-form [form]="conseillerForm" (formSubmit)="onSubmit()"></app-conseiller-form>-->
-<!--  </div>-->
-
-  <div *ngIf="(compteCourants$ | async)?.length === 0" class="text-center w-100 m-5">
+  <div *ngIf="(compteCourants$ | async)?.length === 0 && (comptesEpargnes$ | async)?.length === 0" class="text-center w-100 m-5">
     <h2>No data found</h2>
   </div>
 
-  <ng-template #dataContent>
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg m-5">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="px-6 py-3">
+          Numéro de compte
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Type de compte
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Solde en €
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Client
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Action
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <!-- Display CompteCourant accounts -->
+      <ng-container *ngFor="let compteCourant of (compteCourants$ | async)">
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{compteCourant?.accountNumber}}
+          </th>
+          <td class="px-6 py-4">
+            Compte Courant
+          </td>
+          <td class="px-6 py-4">
+            {{compteCourant?.balance}}
+          </td>
+          <td class="px-6 py-4">
+            {{compteCourant?.clientId}}
+          </td>
+          <td class="flex flex-col text-center">
+            <button class="p-2 m-2 font-medium text-blue-600 dark:text-white hover:bg-green-700">voir les détails</button>
+          </td>
+        </tr>
+      </ng-container>
 
-  </ng-template>
+      <!-- Display CompteEpargne accounts -->
+      <ng-container *ngFor="let compteEpargne of (comptesEpargnes$ | async)">
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{compteEpargne?.accountNumber}}
+          </th>
+          <td class="px-6 py-4">
+            Compte Epargne
+          </td>
+          <td class="px-6 py-4">
+            {{compteEpargne?.balance}}
+          </td>
+          <td class="px-6 py-4">
+            {{compteEpargne?.clientId}}
+          </td>
+          <td class="flex flex-col text-center">
+            <button class="p-2 m-2 font-medium text-blue-600 dark:text-white hover:bg-green-700">voir les détails</button>
+          </td>
+          <td></td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
 </div>

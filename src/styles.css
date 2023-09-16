@@ -11,6 +11,10 @@ html, body {
   min-height: 100%;
 }
 
+table {
+  text-align: center!important;
+}
+
 /* Form */
 input {
   padding: 5px;

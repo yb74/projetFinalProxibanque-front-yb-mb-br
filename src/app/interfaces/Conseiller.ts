@@ -1,4 +1,3 @@
-import {Client} from "./Client";
 import {UserModel} from "./UserModel";
 
 export interface Conseiller {
