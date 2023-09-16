@@ -3,4 +3,6 @@ export interface CompteCourant {
   overdraft: number;
   carteId: number;
   clientId: number;
+  clientName:string;
+	clientFirstname:string;
 }

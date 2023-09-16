@@ -1,3 +1,5 @@
+import { CompteCourant } from "./CompteCourant";
+import { CompteEpargne } from "./CompteEpargne";
 import {Conseiller} from "./Conseiller";
 
 export interface Client {
@@ -8,5 +10,7 @@ export interface Client {
   zipCode: string;
   city: string;
   phoneNumber: string;
-  conseillerId: number;
+  conseiller: Conseiller;
+  compteCourant: CompteCourant;
+	compteEpargne: CompteEpargne;
 }

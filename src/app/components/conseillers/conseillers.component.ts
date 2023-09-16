@@ -22,27 +22,13 @@ export class ConseillersComponent implements OnInit {
   // Flag to determine whether it's in create or update mode
   public isCreateMode: boolean = true;
 
-// Définissez un objet Conseiller vide par défaut
- emptyConseiller: Conseiller = {
-  id: 0,
-  name: "",
-  firstname: "",
-  user: null, // Initialisez user avec null ou une valeur par défaut
-  clientsIds: []
-};
-
-// Utilisez l'objet emptyConseiller pour initialiser UserModel
 selectedConseiller: Conseiller = {
   id: 0,
   name: "",
   firstname: "",
-  clientsIds: [],
-  user: {
-    userName: "",
-    password: "",
-    role: "",
-    conseiller: this.emptyConseiller // Initialisez conseiller avec l'objet vide par défaut
-  }
+  clients: [],
+  username: '',
+  password: ''
 };
 
   // Initialize conseillerForm here

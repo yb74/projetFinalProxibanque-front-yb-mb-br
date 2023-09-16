@@ -1,5 +1,7 @@
-export interface CompteCourant {
+import { Client } from "./Client";
+
+export interface CompteEpargne {
   balance: number;
   remunaration: number;
-  clientId: number;
+  client: Client | null;
 }
