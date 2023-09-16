@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import {Observable} from "rxjs";
 import {CompteCourant} from "../../interfaces/CompteCourant";
@@ -27,5 +27,15 @@ export class ComptesService {
 
   public getComptesEpargnesByClientId(clientId: number): Observable<CompteEpargne[]> {
     return this.http.get<CompteEpargne[]>(`${this.apiBaseUrl}/comptes/courants/client/${clientId}`);
+  }
+
+  public cashTransferCompteCourantToCompteCourant(idEmetteur : number, idRecepteur: number, montant: number) : Observable<CompteCourant> {
+    const params = new HttpParams()
+      .set('idEmetteur', idEmetteur.toString())
+      .set('idRecepteur', idRecepteur.toString())
+      .set('montant', montant.toString());
+
+    // Include the params in the GET request
+    return this.http.post<CompteCourant>(`${this.apiBaseUrl}/transactions/ComptesCourants`, null, { params });
   }
 }

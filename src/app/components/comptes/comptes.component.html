@@ -60,8 +60,8 @@
             {{compteCourant?.clientName}} {{compteCourant?.clientFirstname}}
           </td>
           <td class="flex flex-col text-center">
-            <a [routerLink]="'/compte-details/' + compteCourant?.accountNumber" class="p-2 font-medium text-blue-600 hover:text-green-400">voir les détails</a>
-            <a [routerLink]="'/virement/' + compteCourant?.accountNumber" class="p-2 font-medium text-blue-600 hover:text-green-400">Effectuer un virement</a>
+            <a [routerLink]="'/compte-details/' + compteCourant?.id + '/' + accountType" class="p-2 font-medium text-blue-600 hover:text-green-400">voir les détails</a>
+            <a [routerLink]="'/virement/' + compteCourant?.id + '/' + accountType" class="p-2 font-medium text-blue-600 hover:text-green-400">Effectuer un virement</a>
           </td>
         </tr>
       </ng-container>
@@ -82,8 +82,8 @@
             {{compteEpargne?.clientName}} {{compteEpargne?.clientFirstname}}
           </td>
           <td class="flex flex-col text-center">
-            <a [routerLink]="'/compte-details/' + compteEpargne?.accountNumber" class="p-2 font-medium text-blue-600 hover:text-green-400">voir les détails</a>
-            <a [routerLink]="'/virement/' + compteEpargne?.accountNumber" class="p-2 font-medium text-blue-600 hover:text-green-400">Effectuer un virement</a>
+            <a [routerLink]="'/compte-details/' + compteEpargne?.id + '/' + accountType" class="p-2 font-medium text-blue-600 hover:text-green-400">voir les détails</a>
+            <a [routerLink]="'/virement/' + compteEpargne?.id + '/' + accountType" class="p-2 font-medium text-blue-600 hover:text-green-400">Effectuer un virement</a>
           </td>
         </tr>
       </ng-container>

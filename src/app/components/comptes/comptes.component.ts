@@ -22,6 +22,8 @@ export class ComptesComponent implements OnInit {
   filterForm: FormGroup;
   clients$!: Observable<Client[]>;
 
+  accountType = "";
+
   selectedClientId: number | null = null;
 
   constructor(
@@ -97,6 +99,7 @@ export class ComptesComponent implements OnInit {
   }
 
   private getComptesCourants (): void {
+    this.accountType = "CompteCourant";
     this.compteCourants$ = this.comptesService.getAllComptesCourants().pipe(
       tap(response => {
         console.log(response)
@@ -121,6 +124,7 @@ export class ComptesComponent implements OnInit {
   }
 
   private getComptesEpargnes (): void {
+    this.accountType = "CompteEpargne";
     this.comptesEpargnes$ = this.comptesService.getAllComptesEpargnes().pipe(
       tap(response => {
         console.log(response)

@@ -16,8 +16,8 @@ const routes: Routes = [
   {path: 'conseillers', component: ConseillersComponent},
   {path: 'clients', component: ClientsComponent},
   {path: 'comptes', component: ComptesComponent},
-  { path: 'compte-details/:accountNumber', component: CompteDetailsComponent },
-  { path: 'virement/:accountNumber', component: VirementComponent },
+  { path: 'compte-details/:id/:accountType', component: CompteDetailsComponent },
+  { path: 'virement/:id/:accountType', component: VirementComponent },
   {path: 'login', component: LoginComponent},
 ];
 
