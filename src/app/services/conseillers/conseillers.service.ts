@@ -1,14 +1,15 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, finalize } from 'rxjs';
-import { Conseiller } from 'src/app/interfaces/Conseiller';
+import { HttpClient } from '@angular/common/http';
+
+import {Observable, finalize, tap, catchError, throwError} from "rxjs";
+import { SpinnerService } from '../spinner/spinner.service'
 import { environment } from 'src/environments/environment';
-import { SpinnerService } from '../spinner/spinner.service';
+import { Conseiller } from 'src/app/interfaces/Conseiller';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ConseillerService {
+export class ConseillersService {
   private apiBaseUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient, private spinnerService: SpinnerService) {}
@@ -33,4 +34,5 @@ export class ConseillerService {
   deleteConseiller(id: number): Observable<string> {
     return this.http.delete(`${this.apiBaseUrl}/conseillers/${id}`, { responseType: 'text' });
   }
+
 }

@@ -6,7 +6,7 @@ export interface Conseiller {
   name: string;
   firstname: string;
   user: UserModel | null; //pour régler le probleme d'initialisation un conseiller dans conseillers.component.ts
-  clients: Client[];
+  clientsIds: number[];
 
   //username-email-+password
 }

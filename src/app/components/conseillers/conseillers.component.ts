@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable, catchError, of, tap, throwError } from 'rxjs';
 import { Conseiller } from 'src/app/interfaces/Conseiller';
-import { ConseillerService } from 'src/app/services/conseiller/conseiller.service';
+import { ConseillersService } from 'src/app/services/conseillers/conseillers.service';
 import { FormService } from 'src/app/services/form/form.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
@@ -28,7 +28,7 @@ export class ConseillersComponent implements OnInit {
   name: "",
   firstname: "",
   user: null, // Initialisez user avec null ou une valeur par défaut
-  clients: []
+  clientsIds: []
 };
 
 // Utilisez l'objet emptyConseiller pour initialiser UserModel
@@ -36,7 +36,7 @@ selectedConseiller: Conseiller = {
   id: 0,
   name: "",
   firstname: "",
-  clients: [],
+  clientsIds: [],
   user: {
     userName: "",
     password: "",
@@ -53,7 +53,7 @@ selectedConseiller: Conseiller = {
   });
 
   constructor(
-    private conseillersService: ConseillerService,
+    private conseillersService: ConseillersService,
     private toastService: ToastService,
     private spinnerService: SpinnerService,
     private formService: FormService,
