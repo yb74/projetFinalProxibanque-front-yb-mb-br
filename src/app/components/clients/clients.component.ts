@@ -30,19 +30,12 @@ export class ClientsComponent implements OnInit {
     zipCode: '',
     city: '',
     phoneNumber: '',
-    conseiller: {
-      id: 0,
-      name: '',
-      firstname: '',
-      username: '',
-      password: '',
-      clients: [],
-    },
+    conseillerId:0,
     compteCourant: {
       balance: 0,
       overdraft: 0,
       carteId: 0,
-      clientId: 0,
+      clientId:0,
       clientName: '',
       clientFirstname: '',
       id: 0,
@@ -64,7 +57,11 @@ export class ClientsComponent implements OnInit {
     name: ['', Validators.required],
     firstName: ['', Validators.required],
     adress: ['', Validators.required],
-    zipCode: ['', Validators.required],
+    zipCode: ['', [
+      Validators.required, // Champ obligatoire
+      Validators.pattern('^[0-9]{5,}$') // Au moins 5 chiffres
+    ]
+  ],
     city: ['', Validators.required],
     phoneNumber: ['', Validators.required],
     conseillerId: ['', Validators.required],
@@ -247,10 +244,14 @@ export class ClientsComponent implements OnInit {
       name: [data ? data.name : '', Validators.required],
       firstName: [data ? data.firstName : '', Validators.required],
       adress: [data ? data.adress : '', Validators.required],
-      zipCode: [data ? data.zipCode : '', Validators.required],
+      zipCode: [data ? data.zipCode : '', [
+        Validators.required, // Champ obligatoire
+        Validators.pattern('^[0-9]{5,}$') // Au moins 5 chiffres
+      ]
+    ],
       city: [data ? data.city : '', Validators.required],
       phoneNumber: [data ? data.phoneNumber : '', Validators.required],
-      conseillerId: [data ? data.conseiller.id : '', Validators.required],
+      conseillerId: [data ? data.conseillerId : '', Validators.required],
     });
   }
 }
