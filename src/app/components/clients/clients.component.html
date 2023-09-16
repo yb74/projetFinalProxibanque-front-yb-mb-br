@@ -58,8 +58,8 @@
               {{client?.firstName}}
             </td>
             <td class="px-6 py-4">
-              <ng-container *ngIf="client?.conseiller; else noConseiller">
-                Nom: {{ client.conseiller.name }} <br> Prénom: {{ client.conseiller.firstname }} <br> ID: {{ client.conseiller.id }}
+              <ng-container *ngIf="client?.conseillerId; else noConseiller">
+               ID: {{ client.conseillerId }}
               </ng-container>
               <ng-template #noConseiller>No conseiller</ng-template>
             </td>

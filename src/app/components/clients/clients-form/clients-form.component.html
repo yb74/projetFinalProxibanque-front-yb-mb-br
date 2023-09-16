@@ -77,6 +77,9 @@
                   <!-- Display validation error messages if the field is invalid -->
                   <div *ngIf="!form.get('zipCode')?.valid && form.get('zipCode')?.touched" class="form-error-message">
                     <div *ngIf="form.get('zipCode')?.hasError('required')">This field is required.</div>
+                    <div *ngIf="form.get('zipCode')?.hasError('pattern')" class="form-error-message">
+                      Le code postal doit comporter au moins 5 chiffres.
+                    </div>
                   </div>
                 </div>
   

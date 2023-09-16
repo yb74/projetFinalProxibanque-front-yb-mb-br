@@ -23,7 +23,7 @@ export class ClientsService {
   }
 
   createClient(client: Client, conseillerId: number): Observable<Client> {
-    return this.http.post<Client>(`${this.apiBaseUrl}/clients?conseillerId=${conseillerId}`, client);
+    return this.http.post<Client>(`${this.apiBaseUrl}/clients/create?conseillerId=${conseillerId}`, client);
   }
 
   updateClient(client: {}, conseillerId: number): Observable<Client> {
