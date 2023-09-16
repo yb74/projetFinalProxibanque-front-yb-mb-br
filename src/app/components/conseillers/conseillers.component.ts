@@ -38,6 +38,7 @@ selectedConseiller: Conseiller = {
   firstname: "",
   clientsIds: [],
   user: {
+    id: 0,
     userName: "",
     password: "",
     role: "",
