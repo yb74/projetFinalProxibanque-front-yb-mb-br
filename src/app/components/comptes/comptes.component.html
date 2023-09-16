@@ -57,7 +57,7 @@
             {{compteCourant?.balance}}
           </td>
           <td class="px-6 py-4">
-            {{compteCourant?.clientFirstname}} {{compteCourant?.clientName}}
+            {{compteCourant?.clientName}} {{compteCourant?.clientFirstname}}
           </td>
           <td class="flex flex-col text-center">
             <a [routerLink]="'/compte-details/' + compteCourant?.accountNumber" class="p-2 font-medium text-blue-600 hover:text-green-400">voir les détails</a>
@@ -79,7 +79,7 @@
             {{compteEpargne?.balance}}
           </td>
           <td class="px-6 py-4">
-            {{compteEpargne?.clientName}} {{compteEpargne?.clientFirstName}}
+            {{compteEpargne?.clientName}} {{compteEpargne?.clientFirstname}}
           </td>
           <td class="flex flex-col text-center">
             <a [routerLink]="'/compte-details/' + compteEpargne?.accountNumber" class="p-2 font-medium text-blue-600 hover:text-green-400">voir les détails</a>

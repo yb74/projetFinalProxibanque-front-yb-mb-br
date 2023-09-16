@@ -7,5 +7,5 @@ export interface CompteEpargne {
   remunaration: number;
   clientId: number;
   clientName: string;
-  clientFirstName: string;
+  clientFirstname: string;
 }

@@ -53,7 +53,7 @@ export class ClientsComponent implements OnInit {
       remunaration: 0,
       clientId: 0,
       clientName: '',
-      clientFirstName: '',
+      clientFirstname: '',
       id: 0,
       accountNumber: ''
     },
