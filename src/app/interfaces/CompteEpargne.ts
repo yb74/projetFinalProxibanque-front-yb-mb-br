@@ -1,3 +1,5 @@
+import { Client } from "./Client";
+
 export interface CompteEpargne {
   id: number;
   accountNumber: string;

@@ -1,4 +1,4 @@
-import {UserModel} from "./UserModel";
+import { Client } from "./Client";
 
 export interface Conseiller {
   id:number;

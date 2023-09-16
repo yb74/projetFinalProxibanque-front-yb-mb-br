@@ -45,11 +45,15 @@ export class ClientsComponent implements OnInit {
       clientId: 0,
       clientName: '',
       clientFirstname: '',
+      id: 0,
+      accountNumber: ''
     },
     compteEpargne: {
       balance: 0,
       remunaration: 0,
       client: null,
+      id: 0,
+      accountNumber: ''
     },
   };
 
