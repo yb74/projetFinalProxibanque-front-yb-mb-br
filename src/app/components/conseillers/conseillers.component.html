@@ -59,10 +59,10 @@
               {{conseiller?.firstname}}
             </td>
             <td class="px-6 py-4">
-              <ng-container *ngIf="conseiller?.clientsIds && conseiller.clientsIds.length > 0; else noClients">
-                <div *ngFor="let clientId of conseiller?.clientsIds; let last = last">
+              <ng-container *ngIf="conseiller?.clients && conseiller.clients.length > 0; else noClients">
+                <div *ngFor="let client of conseiller?.clients; let last = last">
                   <ul>
-                    <li class="p-2 border-solid border-b-2 border-sky-500 {{ last ? 'remove-border' : '' }}">ID: {{ clientId }}</li>
+                    <li class="p-2 border-solid border-b-2 border-sky-500 {{ last ? 'remove-border' : '' }}">prénom: {{ client.firstName }} <br> nom: {{ client.name }} <br> ID: {{ client.id }}  </li>
                   </ul>
                 </div>
               </ng-container>
