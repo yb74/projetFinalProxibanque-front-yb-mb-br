@@ -17,6 +17,8 @@ import { ClientsFormComponent } from './components/clients/clients-form/clients-
 import { ConseillersFormComponent } from './components/conseillers/conseillers-form/conseillers-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { SpinnerComponent } from './shared/components/UI/spinner/spinner.component';
+import { CompteDetailsComponent } from './components/compte-details/compte-details.component';
+import { VirementComponent } from './components/virement/virement.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { SpinnerComponent } from './shared/components/UI/spinner/spinner.compone
     RegisterComponent,
     ClientsFormComponent,
     ConseillersFormComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    CompteDetailsComponent,
+    VirementComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {LoginComponent} from "./components/login/login.component";
 import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from "./components/home/home.component";
@@ -7,6 +6,8 @@ import {ConseillersComponent} from "./components/conseillers/conseillers.compone
 import {ClientsComponent} from "./components/clients/clients.component";
 import {ComptesComponent} from "./components/comptes/comptes.component";
 import {RegisterComponent} from "./components/register/register.component";
+import {CompteDetailsComponent} from "./components/compte-details/compte-details.component";
+import {VirementComponent} from "./components/virement/virement.component";
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -15,6 +16,8 @@ const routes: Routes = [
   {path: 'conseillers', component: ConseillersComponent},
   {path: 'clients', component: ClientsComponent},
   {path: 'comptes', component: ComptesComponent},
+  { path: 'compte-details/:accountNumber', component: CompteDetailsComponent },
+  { path: 'virement/:accountNumber', component: VirementComponent },
   {path: 'login', component: LoginComponent},
 ];
 
