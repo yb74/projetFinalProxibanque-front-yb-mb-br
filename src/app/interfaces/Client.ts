@@ -8,5 +8,5 @@ export interface Client {
   zipCode: string;
   city: string;
   phoneNumber: string;
-  conseillerId: number
+  conseillerId: number;
 }

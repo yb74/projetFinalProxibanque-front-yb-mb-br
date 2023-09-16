@@ -1,10 +1,11 @@
-import {Client} from "./Client";
 import {UserModel} from "./UserModel";
 
 export interface Conseiller {
-  id: number;
+  id:number;
   name: string;
   firstname: string;
-  user: UserModel
-  clienstId: number[];
+  user: UserModel | null; //pour régler le probleme d'initialisation un conseiller dans conseillers.component.ts
+  clientsIds: number[];
+
+  //username-email-+password
 }

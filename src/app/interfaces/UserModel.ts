@@ -5,5 +5,5 @@ export interface UserModel {
   userName: string;
   password: string;
   role: string;
-  conseillerId: number;
+  conseiller: Conseiller | null //pour régler le probleme d'initialisation un conseiller dans conseillers.component.ts
 }
