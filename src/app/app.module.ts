@@ -19,6 +19,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { SpinnerComponent } from './shared/components/UI/spinner/spinner.component';
 import { CompteDetailsComponent } from './components/compte-details/compte-details.component';
 import { VirementComponent } from './components/virement/virement.component';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from './services/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,7 @@ import { VirementComponent } from './components/virement/virement.component';
     ConseillersFormComponent,
     SpinnerComponent,
     CompteDetailsComponent,
-    VirementComponent
+    VirementComponent, 
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,7 @@ import { VirementComponent } from './components/virement/virement.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [CookieService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
