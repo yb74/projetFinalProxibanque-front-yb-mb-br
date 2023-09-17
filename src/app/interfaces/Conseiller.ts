@@ -1,9 +1,11 @@
-import {Client} from "./Client";
-import {UserModel} from "./UserModel";
+import { Client } from "./Client";
 
 export interface Conseiller {
+  id:number;
   name: string;
   firstname: string;
-  user: UserModel
+  username:string;
+  password:string;
   clients: Client[];
+  //username-email-+password
 }

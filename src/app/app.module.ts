@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,11 +15,16 @@ import { HeaderComponent } from './shared/components/templates/header/header.com
 import { RegisterComponent } from './components/register/register.component';
 import { ClientsFormComponent } from './components/clients/clients-form/clients-form.component';
 import { ConseillersFormComponent } from './components/conseillers/conseillers-form/conseillers-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+
+import {ReactiveFormsModule} from "@angular/forms";
 import { SpinnerComponent } from './shared/components/UI/spinner/spinner.component';
+import { CompteDetailsComponent } from './components/compte-details/compte-details.component';
+import { VirementComponent } from './components/virement/virement.component';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from './services/auth/auth.service';
 import { SimulationPretComponent } from './simulation-pret/simulation-pret.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -36,15 +42,18 @@ import { SimulationPretComponent } from './simulation-pret/simulation-pret.compo
     ConseillersFormComponent,
     SpinnerComponent,
     SimulationPretComponent
+    CompteDetailsComponent,
+    VirementComponent, 
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule 
   ],
-  providers: [],
+  providers: [CookieService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
