@@ -87,9 +87,13 @@ export class ClientsComponent implements OnInit {
   }
 
   private getClients(): void {
-    // Récupérez l'ID du conseiller connecté depuis le service FormService
-    const loggedInConseillerId = this.formService.getLoggedInConseillerId();
-    
+    // Récupérer le JSON string du localStorage
+    const conseillerData = localStorage.getItem('conseiller');
+    // Parse le JSON string dans un objet JavaScript
+    const conseillerObject = JSON.parse(conseillerData!);
+    // Récupérez l'ID du conseiller connecté depuis le local storage afin que sa liste de client ne disparaisse pas au refresh du navigateur
+    const loggedInConseillerId = conseillerObject.id;
+
     this.clients$ = this.clientService.getAllClients().pipe(
       map((clients) => {
         // Filtrer la liste des clients pour n'afficher que ceux associés au conseiller connecté
@@ -107,12 +111,12 @@ export class ClientsComponent implements OnInit {
               } else {
                 this.toastService.updateToastMessage(error.error);
               }
-      
+
               this.toastService.updateToastVisibility(true);
               setTimeout(() => {
                 this.toastService.updateToastVisibility(false);
               }, 5000);
-      
+
               return throwError(() => error);
             })
           );
