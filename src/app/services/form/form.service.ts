@@ -14,10 +14,20 @@ export class FormService {
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   isLoggedIn = this.isLoggedInSubject.asObservable();
 
+  private loggedInConseillerId: number | null = null;
+
   constructor(private http: HttpClient, private cookieService: CookieService) { 
         // Vérifiez la présence du cookie au démarrage de l'application
         const isLoggedIn = this.cookieService.get('isLoggedIn') === 'true';
         this.isLoggedInSubject.next(isLoggedIn);
+  }
+
+  public setLoggedInConseillerId(conseillerId: number) {
+    this.loggedInConseillerId = conseillerId;
+  }
+
+  public getLoggedInConseillerId(): number | null {
+    return this.loggedInConseillerId;
   }
   
   public updateFormVisibility(newStatus: boolean) {

@@ -34,11 +34,17 @@ export class LoginComponent {
         .subscribe({
           next: (response: any) => {
             // Authentification réussie, récupérez les informations du conseiller
-            const conseillerDTO = response; // Assurez-vous de la structure de la réponse
+            const conseiller = response; // Assurez-vous de la structure de la réponse
 
             // Stockez les informations du conseiller dans le localStorage
-            localStorage.setItem('conseiller', JSON.stringify(conseillerDTO));
+            localStorage.setItem('conseiller', JSON.stringify(conseiller));
             localStorage.setItem('loggedIn', 'true');
+
+            // Récupérez l'ID du conseiller connecté depuis la réponse
+             const loggedInConseillerId = conseiller.id;
+
+            // Stockez l'ID du conseiller connecté dans le service FormService
+            this.service.setLoggedInConseillerId(loggedInConseillerId);
 
             // Mettez à jour l'état de connexion
             this.service.setLoggedInState(true);

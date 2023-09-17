@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, catchError, of, tap, throwError } from 'rxjs';
+import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { Client } from 'src/app/interfaces/Client';
 import { ClientsService } from 'src/app/services/clients/clients.service';
 import { FormService } from 'src/app/services/form/form.service';
@@ -87,30 +87,36 @@ export class ClientsComponent implements OnInit {
   }
 
   private getClients(): void {
+    // Récupérez l'ID du conseiller connecté depuis le service FormService
+    const loggedInConseillerId = this.formService.getLoggedInConseillerId();
+    
     this.clients$ = this.clientService.getAllClients().pipe(
-      tap((response) => {
-        console.log(response);
-        // After getting the conseillers, update the observable
-        this.clients$ = of(response);
+      map((clients) => {
+        // Filtrer la liste des clients pour n'afficher que ceux associés au conseiller connecté
+        return clients.filter((client) => client.conseillerId === loggedInConseillerId);
+      }),
+      tap((filteredClients) => {
+        // Après avoir filtré les clients, mettez à jour l'observable clients$
+        this.clients$ = of(filteredClients);
       }),
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 0) {
-          this.toastService.updateToastMessage(
-            'Network error. Please check your connection.'
+              if (error.status === 0) {
+                this.toastService.updateToastMessage(
+                  'Network error. Please check your connection.'
+                );
+              } else {
+                this.toastService.updateToastMessage(error.error);
+              }
+      
+              this.toastService.updateToastVisibility(true);
+              setTimeout(() => {
+                this.toastService.updateToastVisibility(false);
+              }, 5000);
+      
+              return throwError(() => error);
+            })
           );
-        } else {
-          this.toastService.updateToastMessage(error.error);
-        }
-
-        this.toastService.updateToastVisibility(true);
-        setTimeout(() => {
-          this.toastService.updateToastVisibility(false);
-        }, 5000);
-
-        return throwError(() => error);
-      })
-    );
-  }
+}
 
   delete(client: Client) {
     if (
