@@ -1,0 +1,33 @@
+
+<div>
+    <h1 class="text-3xl font-bold text-center">Simulation de prêt</h1>
+   
+    <form (ngSubmit)="calculateMonthlyPayment()">
+      <div class="form-group">
+        <label for="loanAmount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Montant du prêt (en euros)</label>
+        <input type="number" id="loanAmount"  class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"   [(ngModel)]="loanAmount" name="loanAmount" class="form-control" required min="0">  
+        <div *ngIf="loanAmount < 0"></div>      
+      </div>
+      <div class="form-group">
+        <label for="annualInterestRate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Taux d'intérêt annuel (%)</label>
+        <input type="number" id="annualInterestRate" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"   [(ngModel)]="annualInterestRate" name="annualInterestRate" class="form-control" required min="0">
+        <div *ngIf="annualInterestRate < 0"></div> 
+      </div>
+      <div class="form-group">
+        <label for="loanTermMonths" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Durée du prêt (en mois)</label>
+        <input type="number" id="loanTermMonths"  class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" [(ngModel)]="loanTermMonths" name="loanTermMonths" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Calculer</button>
+      </div>
+    </form>
+</div>
+    <div *ngIf="monthlyPayment">
+      <h3 class="text-3xl font-bold text-center">Résultat :</h3>
+      <div class="rsp">
+        <!--<div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">-->
+        <p>Paiement mensuel estimé : {{ monthlyPayment | number: '1.2-2' }} euros</p>
+      </div>
+    </div>
+   
+    

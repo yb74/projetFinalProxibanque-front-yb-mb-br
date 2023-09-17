@@ -1,0 +1,28 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content:center ;
+    text-align: center;
+    background-color:darkgray ;
+    border-radius: 20px;
+    margin-top: 20px;
+    width: 100vw;
+    color: white;
+}
+
+button{
+    margin-top: 15px;
+}
+h1,h3{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.rsp{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: darkgray;
+    border-radius: 20px;
+    text-align: center;
+}

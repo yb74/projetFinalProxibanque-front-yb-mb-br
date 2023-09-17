@@ -7,6 +7,7 @@ import {ConseillersComponent} from "./components/conseillers/conseillers.compone
 import {ClientsComponent} from "./components/clients/clients.component";
 import {ComptesComponent} from "./components/comptes/comptes.component";
 import {RegisterComponent} from "./components/register/register.component";
+import { SimulationPretComponent } from './simulation-pret/simulation-pret.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'clients', component: ClientsComponent},
   {path: 'comptes', component: ComptesComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'simulation-pret',component:SimulationPretComponent}
 ];
 
 

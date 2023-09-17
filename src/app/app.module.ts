@@ -14,6 +14,11 @@ import { HeaderComponent } from './shared/components/templates/header/header.com
 import { RegisterComponent } from './components/register/register.component';
 import { ClientsFormComponent } from './components/clients/clients-form/clients-form.component';
 import { ConseillersFormComponent } from './components/conseillers/conseillers-form/conseillers-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { SpinnerComponent } from './shared/components/UI/spinner/spinner.component';
+import { SimulationPretComponent } from './simulation-pret/simulation-pret.component';
 
 @NgModule({
   declarations: [
@@ -28,11 +33,16 @@ import { ConseillersFormComponent } from './components/conseillers/conseillers-f
     HeaderComponent,
     RegisterComponent,
     ClientsFormComponent,
-    ConseillersFormComponent
+    ConseillersFormComponent,
+    SpinnerComponent,
+    SimulationPretComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
