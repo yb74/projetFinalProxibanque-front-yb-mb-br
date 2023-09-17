@@ -1,0 +1,74 @@
+<div class="container mx-auto paddin p-4">
+  <h1 class="text-3xl font-bold text-center">
+    Rapport sur les transactions
+  </h1>
+
+  <div *ngIf="isLoading$ | async; else dataContent" class="flex justify-center items-center p-5">
+    <!-- Show the spinner component when isLoading is true -->
+    <app-spinner></app-spinner>
+  </div>
+  <div *ngIf="isToastVisible$ | async">
+    <app-toast></app-toast>
+  </div>
+
+  <div *ngIf="(rapports$ | async)?.length === 0" class="text-center w-100 m-5">
+    <h2>No data found</h2>
+  </div>
+
+  <ng-template #dataContent>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg m-5">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">
+            Date de la transaction
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Type de virement
+          </th>
+          <th scope="col" class="px-6 py-3">
+            ID compte Débiteur
+          </th>
+          <th scope="col" class="px-6 py-3">
+            ID compte créditeur
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Nom du débiteur
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Nom du créditeur
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Somme
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let rapport of rapports$ | async" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+          <td class="px-6 py-4">
+            {{ rapport.timestamp | frenchDate }}
+          </td>
+          <td>
+            {{rapport?.typeDeVirement}}
+          </td>
+          <td>
+            {{rapport?.compteEmitteurId}}
+          </td>
+          <td>
+            {{rapport?.compteRecepteurId}}
+          </td>
+          <td class="px-6 py-4">
+            {{rapport?.clientEmetteur?.name}} {{rapport?.clientEmetteur?.firstName}}
+          </td>
+          <td>
+            {{rapport?.clientRecepteur?.name}} {{rapport?.clientRecepteur?.firstName}}
+          </td>
+          <td class="px-6 py-4">
+            {{rapport?.amount}} €
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-template>
+</div>

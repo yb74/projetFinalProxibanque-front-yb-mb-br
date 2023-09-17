@@ -6,10 +6,11 @@ import {ConseillersComponent} from "./components/conseillers/conseillers.compone
 import {ClientsComponent} from "./components/clients/clients.component";
 import {ComptesComponent} from "./components/comptes/comptes.component";
 import {RegisterComponent} from "./components/register/register.component";
-import { SimulationPretComponent } from './simulation-pret/simulation-pret.component';
+import { SimulationPretComponent } from './components/simulation-pret/simulation-pret.component';
 import {CompteDetailsComponent} from "./components/compte-details/compte-details.component";
 import {VirementComponent} from "./components/virement/virement.component";
 import { AuthService } from './services/auth/auth.service';
+import {RapportTransactionsComponent} from "./components/rapport-transactions/rapport-transactions.component";
 
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'compte-details/:id/:accountType', component: CompteDetailsComponent, canActivate: [AuthService] },
   { path: 'virement/:id/:accountType', component: VirementComponent, canActivate: [AuthService] },
   {path: 'login', component: LoginComponent},
-  {path: 'simulation-pret',component:SimulationPretComponent, canActivate: [AuthService]}
+  {path: 'simulation-pret',component:SimulationPretComponent, canActivate: [AuthService]},
+  {path: 'rapport-transaction',component:RapportTransactionsComponent, canActivate: [AuthService]}
 ];
 
 

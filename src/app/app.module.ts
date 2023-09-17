@@ -22,8 +22,11 @@ import { CompteDetailsComponent } from './components/compte-details/compte-detai
 import { VirementComponent } from './components/virement/virement.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from './services/auth/auth.service';
-import { SimulationPretComponent } from './simulation-pret/simulation-pret.component';
+import { SimulationPretComponent } from './components/simulation-pret/simulation-pret.component';
 import { FormsModule } from '@angular/forms';
+import { RapportTransactionsComponent } from './components/rapport-transactions/rapport-transactions.component';
+import {FrenchDatePipe} from "./custom-pipes/french-date--pipe";
+import {DatePipe} from "@angular/common";
 
 
 @NgModule({
@@ -43,17 +46,22 @@ import { FormsModule } from '@angular/forms';
     SpinnerComponent,
     SimulationPretComponent,
     CompteDetailsComponent,
-    VirementComponent, 
-
+    VirementComponent,
+    RapportTransactionsComponent,
+    [RapportTransactionsComponent, FrenchDatePipe],
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule 
+    HttpClientModule
   ],
-  providers: [CookieService, AuthService],
+  providers: [
+    CookieService,
+    AuthService,
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
