@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ComptesService} from "../../services/comptes/comptes.service";
-import {Observable, of} from "rxjs";
-import {CompteCourant} from "../../interfaces/CompteCourant";
-
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ComptesService } from "../../services/comptes/comptes.service";
+import { Observable, of } from "rxjs";
+import { catchError, tap } from 'rxjs/operators';
+import { ToastService } from "../../services/toast/toast.service";
 
 @Component({
   selector: 'app-virement',
@@ -12,24 +12,29 @@ import {CompteCourant} from "../../interfaces/CompteCourant";
   styleUrls: ['./virement.component.css']
 })
 export class VirementComponent implements OnInit {
-  virementForm!: FormGroup; // Define a FormGroup for the form
-  transferResult$!: Observable<CompteCourant | null>;
+  virementForm!: FormGroup;
+  transferResult$!: Observable<any | null>;
+  accountType: string = "";
+  public isToastVisible$: Observable<boolean>;
 
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private comptesService: ComptesService // Inject your VirementService
-  ) {}
+    private comptesService: ComptesService,
+    private toastService: ToastService
+  ) {
+    this.isToastVisible$ = this.toastService.isToastVisible$;
+  }
 
   ngOnInit(): void {
+    this.accountType = this.route.snapshot.paramMap.get('accountType')!;
     this.initializeForm();
-    this.transferResult$ = of<CompteCourant | null>(null); // Initialize as an empty observable with null value
   }
 
   initializeForm(): void {
     this.virementForm = this.formBuilder.group({
-      idRecepteur: ['', Validators.required], // Recipient's ID, required
-      montant: ['', [Validators.required, Validators.min(1)]] // Amount, required and minimum value of 1
+      idRecepteur: ['', Validators.required],
+      montant: ['', [Validators.required, Validators.min(1)]]
     });
   }
 
@@ -39,9 +44,36 @@ export class VirementComponent implements OnInit {
       const idRecepteur = +this.virementForm.get('idRecepteur')?.value;
       const montant = +this.virementForm.get('montant')?.value;
 
-      console.log(idEmetteur)
+      this.transferResult$ = this.comptesService.cashTransferToAccount(idEmetteur, idRecepteur, montant, this.accountType)
+        .pipe(
+          tap((response) => {
+            console.log(response)
+            // Display success message using ToastService
+            this.toastService.updateToastMessage(response); // Update the message from the response
+            this.toastService.updateToastVisibility(true);
 
-      this.transferResult$ = this.comptesService.cashTransferCompteCourantToCompteCourant(idEmetteur, idRecepteur, montant);
+            setTimeout(() => {
+              this.toastService.updateToastVisibility(false);
+            }, 5000);
+
+            this.virementForm.reset();
+          }),
+          catchError((error) => {
+            if (error.error) {
+              this.toastService.updateToastMessage(error.message);
+              console.log(error)
+            } else {
+              this.toastService.updateToastMessage('An error occurred.');
+            }
+            this.toastService.updateToastVisibility(true);
+
+            setTimeout(() => {
+              this.toastService.updateToastVisibility(false);
+            }, 5000);
+
+            return of(null);
+          })
+        );
     }
   }
 }

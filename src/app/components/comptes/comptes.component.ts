@@ -39,7 +39,7 @@ export class ComptesComponent implements OnInit {
     });
   }
 
-  // Fetch clients asynchronously (replace with your data fetching logic)
+  // Fetch clients asynchronously
   fetchClientsLazy() {
     this.clients$ = this.clientService.getAllClients();
   }
