@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 import { Component,OnInit } from '@angular/core';
 import { ToastService } from 'src/app/services/toast.service';
-=======
-import {Component, OnInit} from '@angular/core';
-import {ToastService} from "../../../../services/toast/toast.service";
->>>>>>> 2d3f364cdbfd29338c277683433845b1a4bd60c4
+
 
 @Component({
   selector: 'app-toast',

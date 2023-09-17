@@ -41,7 +41,7 @@ import { FormsModule } from '@angular/forms';
     ClientsFormComponent,
     ConseillersFormComponent,
     SpinnerComponent,
-    SimulationPretComponent
+    SimulationPretComponent,
     CompteDetailsComponent,
     VirementComponent, 
 

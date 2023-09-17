@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'compte-details/:id/:accountType', component: CompteDetailsComponent, canActivate: [AuthService] },
   { path: 'virement/:id/:accountType', component: VirementComponent, canActivate: [AuthService] },
   {path: 'login', component: LoginComponent},
-  {path: 'simulation-pret',component:SimulationPretComponent}
+  {path: 'simulation-pret',component:SimulationPretComponent, canActivate: [AuthService]}
 ];
 
 
