@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
@@ -19,9 +19,9 @@ export class LoginComponent {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private http: HttpClient, // Ajoutez le service HttpClient,
+    private http: HttpClient,
     private cookieService: CookieService,
-    private service:FormService
+    private service: FormService
   ) { }
 
   errorMessage = ''; // Propriété pour stocker le message d'erreur
@@ -29,22 +29,24 @@ export class LoginComponent {
   login() {
     if (this.loginForm.valid) {
       const formData = this.loginForm.value;
-  
+
       this.http.get(`http://localhost:8080/conseillers/login?username=${formData.username}&password=${formData.password}`)
         .subscribe({
           next: (response: any) => {
             // Authentification réussie, récupérez les informations du conseiller
             const conseillerDTO = response; // Assurez-vous de la structure de la réponse
-  
+
             // Stockez les informations du conseiller dans le localStorage
             localStorage.setItem('conseiller', JSON.stringify(conseillerDTO));
             localStorage.setItem('loggedIn', 'true');
 
-             // Mettez à jour l'état de connexion
-            this.service.updateLoginStatus(true);
+            // Mettez à jour l'état de connexion
+            this.service.setLoggedInState(true);
+            
             // Redirigez vers une autre page ou effectuez d'autres actions nécessaires
             this.router.navigate(['/home']);
-                // Après une connexion réussie, définissez un cookie pour maintenir l'état de connexion
+
+            // Après une connexion réussie, définissez un cookie pour maintenir l'état de connexion
             this.cookieService.set('isLoggedIn', 'true');
           },
           error: (error) => {
@@ -54,6 +56,5 @@ export class LoginComponent {
           }
         });
     }
-  }  
-  
+  }
 }

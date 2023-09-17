@@ -10,12 +10,17 @@ import { FormService } from 'src/app/services/form/form.service';
 })
 export class HeaderComponent implements OnInit {
   isActive = false;
-  isConnected: boolean | undefined; // Utilisez un booléen pour vérifier l'état de connexion
+  isConnected = false; // Initialisez isConnected à false par défaut
 
-  constructor(private router: Router, private cookieService: CookieService, private formService: FormService) {}
+  constructor(private router: Router, private cookieService: CookieService, private formService: FormService) {
+    // Abonnez-vous à formService.isLoggedIn pour mettre à jour isConnected
+    this.formService.isLoggedIn.subscribe((isLoggedIn) => {
+      this.isConnected = isLoggedIn;
+    });
+  }
 
   ngOnInit() {
-    // Abonnez-vous à FormService.isLoggedIn$ pour mettre à jour isConnected
+    // Abonnez-vous à FormService.isLoggedIn pour mettre à jour isConnected
     this.formService.isLoggedIn.subscribe((isLoggedIn) => {
       this.isConnected = isLoggedIn;
     });
