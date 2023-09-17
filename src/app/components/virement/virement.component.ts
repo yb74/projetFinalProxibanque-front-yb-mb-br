@@ -59,11 +59,10 @@ export class VirementComponent implements OnInit {
             this.virementForm.reset();
           }),
           catchError((error) => {
-            if (error.error) {
-              this.toastService.updateToastMessage(error.message);
-              console.log(error)
+            if (error.status === 0) {
+              this.toastService.updateToastMessage('Network error. Please check your connection.');
             } else {
-              this.toastService.updateToastMessage('An error occurred.');
+              this.toastService.updateToastMessage(error.error);
             }
             this.toastService.updateToastVisibility(true);
 

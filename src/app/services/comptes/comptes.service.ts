@@ -20,6 +20,14 @@ export class ComptesService {
     return this.http.get<CompteEpargne[]>(`${this.apiBaseUrl}/comptes/epargnes`);
   }
 
+  public getCompteCourantById(id: number) : Observable<CompteCourant> {
+    return this.http.get<CompteCourant>(`${this.apiBaseUrl}/comptes/courants/${id}`);
+  }
+
+  public getCompteEpargneById(id: number) : Observable<CompteEpargne> {
+    return this.http.get<CompteEpargne>(`${this.apiBaseUrl}/comptes/epargnes/${id}`);
+  }
+
   public getComptesCourantsByClientId(clientId: number): Observable<CompteCourant[]> {
     return this.http.get<CompteCourant[]>(`${this.apiBaseUrl}/comptes/courants/client/${clientId}`);
   }
