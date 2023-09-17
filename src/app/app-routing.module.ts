@@ -8,16 +8,17 @@ import {ComptesComponent} from "./components/comptes/comptes.component";
 import {RegisterComponent} from "./components/register/register.component";
 import {CompteDetailsComponent} from "./components/compte-details/compte-details.component";
 import {VirementComponent} from "./components/virement/virement.component";
+import { AuthService } from './services/auth/auth.service';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'conseillers', component: ConseillersComponent},
-  {path: 'clients', component: ClientsComponent},
-  {path: 'comptes', component: ComptesComponent},
-  { path: 'compte-details/:id/:accountType', component: CompteDetailsComponent },
-  { path: 'virement/:id/:accountType', component: VirementComponent },
+  { path: 'conseillers', component: ConseillersComponent, canActivate: [AuthService] },
+  {path: 'clients', component: ClientsComponent, canActivate: [AuthService]},
+  {path: 'comptes', component: ComptesComponent, canActivate: [AuthService]},
+  { path: 'compte-details/:id/:accountType', component: CompteDetailsComponent, canActivate: [AuthService] },
+  { path: 'virement/:id/:accountType', component: VirementComponent, canActivate: [AuthService] },
   {path: 'login', component: LoginComponent},
 ];
 
