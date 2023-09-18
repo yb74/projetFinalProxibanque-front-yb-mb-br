@@ -18,8 +18,55 @@
                hover:border-blue-500 hover:bg-blue-200"
         [class.form-error]="virementForm.get('montant')?.invalid && virementForm.get('montant')?.touched"
       >
-      <div *ngIf="virementForm.get('montant')?.invalid && virementForm.get('montant')?.touched" class="text-red-600 font-bold mt-1">La somme est requise et doit supérieur ou égale à 1.</div>
+      <div *ngIf="virementForm.get('montant')?.invalid && virementForm.get('montant')?.touched" class="text-red-600 font-bold mt-1">La somme est requise et doit être supérieure ou égale à 1.</div>
     </div>
+    <div class="mb-4">
+      <label for="typeVirement" class="block text-gray-700 text-sm font-semibold mb-2">Type de virement</label>
+      <select
+        id="typeVirement"
+        formControlName="typeVirement"
+        class="w-full px-4 py-2 rounded-lg shadow-sm
+               focus:outline-none focus:ring focus:ring-blue-200 transition duration-300
+               border border-blue-300 bg-blue-100
+               hover:border-blue-500 hover:bg-blue-200"
+      >
+        <option value="compteCourantVersCompteCourant">Compte Courant vers Compte Courant</option>
+        <option value="compteCourantVersCompteEpargne">Compte Courant vers Compte Epargne</option>
+        <option value="compteEpargneVersCompteCourant">Compte Epargne vers Compte Courant</option>
+      </select>
+    </div>
+    <div class="mb-4">
+      <label for="idEmetteur" class="block text-gray-700 text-sm font-semibold mb-2">ID de l'émetteur</label>
+      <input
+        type="text"
+        id="idEmetteur"
+        formControlName="idEmetteur"
+        class="w-full px-4 py-2 rounded-lg shadow-sm
+        focus:outline-none focus:ring focus:ring-blue-200 transition duration-300
+        border border-blue-300 bg-blue-100
+        hover:border-blue-500 hover:bg-blue-200"
+        [class.form-error]="virementForm.get('idEmetteur')?.invalid && virementForm.get('idEmetteur')?.touched"
+      >
+      <div *ngIf="virementForm.get('idEmetteur')?.invalid && virementForm.get('idEmetteur')?.touched" class="text-red-600 font-bold mt-1">ID de l'émetteur requis.</div>
+    </div>
+    
+    <div class="mb-4" *ngIf="virementForm.get('typeVirement')?.value !== 'compteCourantVersCompteEpargne' && virementForm.get('typeVirement')?.value !== 'compteEpargneVersCompteCourant'">
+      <label for="idRecepteur" class="block text-gray-700 text-sm font-semibold mb-2">ID du récepteur</label>
+      <input
+        type="text"
+        id="idRecepteur"
+        formControlName="idRecepteur"
+        class="w-full px-4 py-2 rounded-lg shadow-sm
+        focus:outline-none focus:ring focus:ring-blue-200 transition duration-300
+        border border-blue-300 bg-blue-100
+        hover:border-blue-500 hover:bg-blue-200"
+        [class.form-error]="virementForm.get('idRecepteur')?.invalid && virementForm.get('idRecepteur')?.touched"
+      >
+      <div *ngIf="virementForm.get('idRecepteur')?.invalid && virementForm.get('idRecepteur')?.touched" class="text-red-600 font-bold mt-1">ID du récepteur requis.</div>
+    </div>
+    
+    
+    
     <button
       type="submit"
       [disabled]="!virementForm.valid"

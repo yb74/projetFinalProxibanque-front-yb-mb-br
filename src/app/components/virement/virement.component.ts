@@ -33,22 +33,42 @@ export class VirementComponent implements OnInit {
 
   initializeForm(): void {
     this.virementForm = this.formBuilder.group({
-      montant: ['', [Validators.required, Validators.min(1)]]
+      montant: ['', [Validators.required, Validators.min(1)]],
+      typeVirement: ['compteCourantVersCompteCourant', Validators.required], // Par défaut, sélectionnez le type de virement
+      idEmetteur: ['', Validators.required], // Champ de saisie pour l'ID de l'émetteur
+      idRecepteur: ['', Validators.required] // Champ de saisie pour l'ID du récepteur
+    });
+
+    // Écoutez les changements du type de virement pour activer ou désactiver le champ de l'ID du récepteur
+    this.virementForm.get('typeVirement')?.valueChanges.subscribe((typeVirement) => {
+      if (typeVirement === 'compteCourantVersCompteEpargne' || typeVirement === 'compteEpargneVersCompteCourant') {
+        this.virementForm.get('idRecepteur')?.disable(); // Désactiver le champ de l'ID du récepteur
+      } else {
+        this.virementForm.get('idRecepteur')?.enable(); // Activer le champ de l'ID du récepteur
+      }
     });
   }
 
   onSubmit(): void {
     if (this.virementForm.valid) {
-      const idEmetteur = +this.route.snapshot.paramMap.get('id')!;
+      const idEmetteur = +this.virementForm.get('idEmetteur')?.value;
       const idRecepteur = +this.virementForm.get('idRecepteur')?.value;
       const montant = +this.virementForm.get('montant')?.value;
+      const typeVirement = this.virementForm.get('typeVirement')?.value;      
 
-      this.transferResult$ = this.comptesService.cashTransferToAccount(idEmetteur, montant, this.accountType)
+      // Créez un objet de données de virement pour l'envoyer au service
+      const virementData = {
+        idEmetteur,
+        idRecepteur,
+        montant,
+        typeVirement
+      };
+
+      this.transferResult$ = this.comptesService.cashTransfer(virementData)
         .pipe(
           tap((response) => {
-            console.log(response)
-            // Display success message using ToastService
-            this.toastService.updateToastMessage(response); // Update the message from the response
+            // Affichez la réponse de succès dans le toast
+            this.toastService.updateToastMessage(response);
             this.toastService.updateToastVisibility(true);
 
             setTimeout(() => {
@@ -59,9 +79,9 @@ export class VirementComponent implements OnInit {
           }),
           catchError((error) => {
             if (error.status === 0) {
-              this.toastService.updateToastMessage('Network error. Please check your connection.');
+              this.toastService.updateToastMessage('Erreur réseau. Veuillez vérifier votre connexion.');
             } else {
-              console.log(error)
+              console.error(error);
               this.toastService.updateToastMessage(error.error);
             }
             this.toastService.updateToastVisibility(true);

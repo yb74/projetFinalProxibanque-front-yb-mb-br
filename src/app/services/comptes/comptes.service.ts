@@ -2,15 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from "rxjs";
-import { CompteCourant } from "../../interfaces/CompteCourant";
-import { CompteEpargne } from "../../interfaces/CompteEpargne";
+import { VirementData } from 'src/app/interfaces/virment-data';
+import { CompteCourant } from 'src/app/interfaces/CompteCourant';
+import { CompteEpargne } from 'src/app/interfaces/CompteEpargne';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComptesService {
   private apiBaseUrl = environment.apiBaseUrl;
+
   constructor(private http: HttpClient) { }
+
 
   public getAllComptesCourants(): Observable<CompteCourant[]> {
     return this.http.get<CompteCourant[]>(`${this.apiBaseUrl}/comptes/courants`);
@@ -28,46 +31,39 @@ export class ComptesService {
     return this.http.get<CompteEpargne>(`${this.apiBaseUrl}/comptes/epargnes/${id}`);
   }
 
-  public cashTransferToAccount(
-    idEmetteur: number,
-    montant: number,
-    accountType: string
-  ): Observable<string> {
-    const idRecepteur = 1;
+
+  public cashTransfer(virementData: VirementData): Observable<string> {
+    // Utilisez virementData au lieu de la route.snapshot pour obtenir l'ID de l'émetteur
+    const idEmetteur = virementData.idEmetteur;
+    const idRecepteur = virementData.idRecepteur;
 
     let params = new HttpParams();
 
     params = params
       .set('idEmetteur', idEmetteur.toString())
       .set('idRecepteur', idRecepteur.toString())
-      .set('montant', montant.toString());
+      .set('montant', virementData.montant.toString())
+      .set('typeVirement', virementData.typeVirement);
 
     let endpoint = '';
-    let includeTypeVirement = false;
 
-    switch (accountType) {
-      case 'CompteCourant':
+    switch (virementData.typeVirement) {
+      case 'compteCourantVersCompteCourant':
         endpoint = 'transactions/ComptesCourants';
         break;
-      case 'CompteEpargne':
-        includeTypeVirement = true;
+      case 'compteCourantVersCompteEpargne':
+      case 'compteEpargneVersCompteCourant':
         endpoint = 'transactions/CourantEpargne';
         break;
       default:
-        console.log(`Invalid Account Type: ${accountType}`);
+        console.log(`Invalid Account Type: ${virementData.typeVirement}`);
         break;
     }
 
-    // Include the 'typeVirement' parameter conditionally
-    if (includeTypeVirement) {
-      params = params.set('typeVirement', 'compteEpargneVersCompteCourant'); // Update params here
-    }
-
-    // Include the params in the POST request and set responseType to 'text'
+    // Incluez les paramètres dans la demande PUT et définissez responseType sur 'text'
     return this.http.put(`${this.apiBaseUrl}/${endpoint}`, null, {
       params,
-      responseType: 'text' // Specify that the response should be treated as plain text
+      responseType: 'text'
     });
   }
-
 }
