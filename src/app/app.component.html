@@ -1,4 +1,7 @@
-<app-header></app-header>
+<ng-container *ngIf="isConnected">
+  <app-header></app-header>
+</ng-container>
+
 <div class="main-container">
   <router-outlet></router-outlet>
 </div>

@@ -44,6 +44,7 @@ export class HeaderComponent implements OnInit {
 
     // Si l'utilisateur confirme la déconnexion, supprimez les informations de connexion
     if (confirmLogout) {
+
       // Supprimez le token du stockage local lors de la déconnexion
       localStorage.removeItem('conseiller');
       localStorage.removeItem('loggedIn');
@@ -56,6 +57,8 @@ export class HeaderComponent implements OnInit {
 
       // Redirigez vers la page de connexion ou une autre page appropriée
       this.router.navigate(['/login']);
+
+      window.location.reload()
     }
   }
 }
