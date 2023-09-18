@@ -26,17 +26,19 @@ export class VirementComponent implements OnInit {
     this.isToastVisible$ = this.toastService.isToastVisible$;
   }
 
+
   ngOnInit(): void {
     this.accountType = this.route.snapshot.paramMap.get('accountType')!;
-    this.initializeForm();
+    const idEmetteurFromRoute = +this.route.snapshot.paramMap.get('id')!;
+    this.initializeForm(idEmetteurFromRoute);
   }
 
-  initializeForm(): void {
+  initializeForm(defaultIdEmetteur: number): void {
     this.virementForm = this.formBuilder.group({
       montant: ['', [Validators.required, Validators.min(1)]],
-      typeVirement: ['compteCourantVersCompteCourant', Validators.required], // Par défaut, sélectionnez le type de virement
-      idEmetteur: ['', Validators.required], // Champ de saisie pour l'ID de l'émetteur
-      idRecepteur: ['', Validators.required] // Champ de saisie pour l'ID du récepteur
+      typeVirement: ['compteCourantVersCompteCourant', Validators.required],
+      idEmetteur: [{ value: defaultIdEmetteur, disabled: true }, Validators.required],
+      idRecepteur: ['', Validators.required]
     });
 
     // Écoutez les changements du type de virement pour activer ou désactiver le champ de l'ID du récepteur
@@ -48,6 +50,29 @@ export class VirementComponent implements OnInit {
       }
     });
   }
+
+  // ngOnInit(): void {
+  //   this.accountType = this.route.snapshot.paramMap.get('accountType')!;
+  //   this.initializeForm();
+  // }
+
+  // initializeForm(): void {
+  //   this.virementForm = this.formBuilder.group({
+  //     montant: ['', [Validators.required, Validators.min(1)]],
+  //     typeVirement: ['compteCourantVersCompteCourant', Validators.required], // Par défaut, sélectionnez le type de virement
+      // idEmetteur: ['', Validators.required], // Champ de saisie pour l'ID de l'émetteur
+  //     idRecepteur: ['', Validators.required] // Champ de saisie pour l'ID du récepteur
+  //   });
+
+  //   // Écoutez les changements du type de virement pour activer ou désactiver le champ de l'ID du récepteur
+  //   this.virementForm.get('typeVirement')?.valueChanges.subscribe((typeVirement) => {
+  //     if (typeVirement === 'compteCourantVersCompteEpargne' || typeVirement === 'compteEpargneVersCompteCourant') {
+  //       this.virementForm.get('idRecepteur')?.disable(); // Désactiver le champ de l'ID du récepteur
+  //     } else {
+  //       this.virementForm.get('idRecepteur')?.enable(); // Activer le champ de l'ID du récepteur
+  //     }
+  //   });
+  // }
 
   onSubmit(): void {
     if (this.virementForm.valid) {

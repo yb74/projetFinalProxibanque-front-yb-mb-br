@@ -64,17 +64,20 @@
       >
       <div *ngIf="virementForm.get('idRecepteur')?.invalid && virementForm.get('idRecepteur')?.touched" class="text-red-600 font-bold mt-1">ID du récepteur requis.</div>
     </div>
+<!-- Affichez un message d'erreur si les comptes de l'émetteur et du récepteur sont les mêmes et s'ils ont été touchés ou contiennent des valeurs -->
+    <div *ngIf="virementForm.get('idEmetteur')?.value === virementForm.get('idRecepteur')?.value && virementForm.get('typeVirement')?.value === 'compteCourantVersCompteCourant' && (virementForm.get('idEmetteur')?.touched || virementForm.get('idRecepteur')?.touched || virementForm.get('idEmetteur')?.value || virementForm.get('idRecepteur')?.value)" class="text-red-600 font-bold mt-1">
+        Les comptes de l'émetteur et du récepteur ne peuvent pas être les mêmes.
+    </div>
+
     
-    
-    
-    <button
-      type="submit"
-      [disabled]="!virementForm.valid"
-      class="w-full px-4 py-2 rounded-lg shadow-md text-white bg-blue-500 hover:bg-blue-600 transition duration-300"
-      [class.error-button]="!virementForm.valid"
-    >
-      Valider
-    </button>
+  <button
+  type="submit"
+  [disabled]="!virementForm.valid || (virementForm.get('idEmetteur')?.value === virementForm.get('idRecepteur')?.value && virementForm.get('typeVirement')?.value === 'compteCourantVersCompteCourant')"
+  class="w-full px-4 py-2 rounded-lg shadow-md text-white bg-blue-500 hover:bg-blue-600 transition duration-300"
+  [class.error-button]="!virementForm.valid || (virementForm.get('idEmetteur')?.value === virementForm.get('idRecepteur')?.value && virementForm.get('typeVirement')?.value === 'compteCourantVersCompteCourant')"
+>
+            Valider
+</button>
 
     <div *ngIf="transferResult$ | async as result" class="text-green-600 font-bold mt-2">
       {{ result | json }}

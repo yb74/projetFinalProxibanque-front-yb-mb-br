@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { VirementData } from 'src/app/interfaces/virment-data';
 import { CompteCourant } from 'src/app/interfaces/CompteCourant';
 import { CompteEpargne } from 'src/app/interfaces/CompteEpargne';
@@ -36,7 +36,6 @@ export class ComptesService {
     // Utilisez virementData au lieu de la route.snapshot pour obtenir l'ID de l'émetteur
     const idEmetteur = virementData.idEmetteur;
     const idRecepteur = virementData.idRecepteur;
-
     let params = new HttpParams();
 
     params = params
