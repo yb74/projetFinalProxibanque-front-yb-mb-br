@@ -28,18 +28,6 @@ export class ComptesService {
     return this.http.get<CompteEpargne>(`${this.apiBaseUrl}/comptes/epargnes/${id}`);
   }
 
-  public getComptesCourantsByClientId(clientId: number): Observable<CompteCourant[]> {
-    return this.http.get<CompteCourant[]>(`${this.apiBaseUrl}/comptes/courants/client/${clientId}`);
-  }
-
-  public getComptesEpargnesByClientId(clientId: number): Observable<CompteEpargne[]> {
-    return this.http.get<CompteEpargne[]>(`${this.apiBaseUrl}/comptes/epargnes/client/${clientId}`);
-  }
-
-  public getCompteCourantByAccountNumber(accountNumber: number): Observable<CompteCourant> {
-    return this.http.get<CompteCourant>(`${this.apiBaseUrl}/comptes/courants/${accountNumber}`);
-  }
-
   public cashTransferToAccount(
     idEmetteur: number,
     idRecepteur: number,

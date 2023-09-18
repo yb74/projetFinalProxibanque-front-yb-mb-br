@@ -7,17 +7,6 @@
     <app-toast></app-toast>
   </div>
 
-  <div class="filters-container">
-    <form [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="filter-by-clients-input">
-      <label for="client" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sélectionnez un client</label>
-      <select name="client" id="client" formControlName="client" (click)="fetchClientsLazy()">
-        <option value="">--Veuillez choisir un Client--</option>
-        <option *ngFor="let client of clients$ | async" [value]="client?.id">{{ client?.name }} {{ client?.firstName }}</option>
-      </select>
-      <button type="submit">Filtrer</button>
-    </form>
-  </div>
-
   <div *ngIf="(compteCourants$ | async)?.length === 0 && (comptesEpargnes$ | async)?.length === 0" class="text-center w-100 m-5">
     <h2>No data found</h2>
   </div>

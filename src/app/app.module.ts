@@ -13,13 +13,12 @@ import { HeaderComponent } from './shared/components/templates/header/header.com
 import { RegisterComponent } from './components/register/register.component';
 import { ClientsFormComponent } from './components/clients/clients-form/clients-form.component';
 import { ConseillersFormComponent } from './components/conseillers/conseillers-form/conseillers-form.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import { CompteDetailsComponent } from './components/compte-details/compte-details.component';
 import { VirementComponent } from './components/virement/virement.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from './services/auth/auth.service';
 import { SimulationPretComponent } from './components/simulation-pret/simulation-pret.component';
-import { FormsModule } from '@angular/forms';
 import { RapportTransactionsComponent } from './components/rapport-transactions/rapport-transactions.component';
 import {FrenchDatePipe} from "./custom-pipes/french-date-pipe";
 import {DatePipe} from "@angular/common";
@@ -46,7 +45,8 @@ import { ToastComponent } from './shared/components/UI/toast/toast.component';
     CompteDetailsComponent,
     VirementComponent,
     RapportTransactionsComponent,
-    [RapportTransactionsComponent, FrenchDatePipe],
+    [RapportTransactionsComponent, FrenchDatePipe
+  ],
   ],
   imports: [
     BrowserModule,

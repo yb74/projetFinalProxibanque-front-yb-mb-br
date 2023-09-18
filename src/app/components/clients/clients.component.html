@@ -25,16 +25,10 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
           <th scope="col" class="px-6 py-3">
-            ID
-          </th>
-          <th scope="col" class="px-6 py-3">
             Nom
           </th>
           <th scope="col" class="px-6 py-3">
             Prénom
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Conseiller des clients
           </th>
           <th scope="col" class="px-6 py-3">
             Action
@@ -56,12 +50,6 @@
           </td>
           <td class="px-6 py-4">
             {{client?.firstName}}
-          </td>
-          <td class="px-6 py-4">
-            <ng-container *ngIf="client?.conseillerId; else noConseiller">
-             ID: {{ client.conseillerId }}
-            </ng-container>
-            <ng-template #noConseiller>No conseiller</ng-template>
           </td>
           <td class="flex flex-col text-center">
             <button (click)="openEditClientForm(client)" class="p-2 m-2 font-medium text-blue-600 dark:text-white hover:bg-amber-400">Editer</button>

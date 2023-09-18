@@ -19,7 +19,6 @@ export class ComptesComponent implements OnInit {
   public comptesEpargnes$: Observable<CompteEpargne[]> = new Observable<CompteEpargne[]>();
   public isToastVisible$: Observable<boolean>;
 
-  filterForm: FormGroup;
   clients$!: Observable<Client[]>;
 
   accountType = "";
@@ -33,69 +32,11 @@ export class ComptesComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.isToastVisible$ = this.toastService.isToastVisible$;
-
-    this.filterForm = this.formBuilder.group({
-      client: ['']
-    });
-  }
-
-  // Fetch clients asynchronously (replace with your data fetching logic)
-  fetchClientsLazy() {
-    this.clients$ = this.clientService.getAllClients();
   }
 
   ngOnInit(): void {
     this.getComptesCourants();
     this.getComptesEpargnes();
-  }
-
-  // Update the onSubmit method to set the selected client ID
-  onSubmit() {
-    const clientControl = this.filterForm.get('client');
-    if (clientControl) {
-      const selectedClientId = clientControl.value;
-      this.selectedClientId = selectedClientId;
-      this.getComptesCourantsByClientId(selectedClientId);
-      this.getComptesEpargnesByClientId(selectedClientId);
-    }
-  }
-
-  private getComptesCourantsByClientId(selectedClientId: number) : void {
-    this.compteCourants$ = this.comptesService.getComptesCourantsByClientId(selectedClientId).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 0) {
-          this.toastService.updateToastMessage('Network error. Please check your connection.');
-        } else {
-          this.toastService.updateToastMessage(error.error);
-        }
-
-        this.toastService.updateToastVisibility(true);
-        setTimeout(() => {
-          this.toastService.updateToastVisibility(false);
-        }, 5000);
-
-        return throwError(() => error);
-      })
-    )
-  }
-
-  private getComptesEpargnesByClientId(selectedClientId: number) : void {
-    this.comptesEpargnes$ = this.comptesService.getComptesEpargnesByClientId(selectedClientId).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 0) {
-          this.toastService.updateToastMessage('Network error. Please check your connection.');
-        } else {
-          this.toastService.updateToastMessage(error.error);
-        }
-
-        this.toastService.updateToastVisibility(true);
-        setTimeout(() => {
-          this.toastService.updateToastVisibility(false);
-        }, 5000);
-
-        return throwError(() => error);
-      })
-    )
   }
 
   private getComptesCourants (): void {
