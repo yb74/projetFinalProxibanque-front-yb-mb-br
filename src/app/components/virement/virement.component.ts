@@ -33,7 +33,6 @@ export class VirementComponent implements OnInit {
 
   initializeForm(): void {
     this.virementForm = this.formBuilder.group({
-      idRecepteur: ['', Validators.required],
       montant: ['', [Validators.required, Validators.min(1)]]
     });
   }
@@ -44,7 +43,7 @@ export class VirementComponent implements OnInit {
       const idRecepteur = +this.virementForm.get('idRecepteur')?.value;
       const montant = +this.virementForm.get('montant')?.value;
 
-      this.transferResult$ = this.comptesService.cashTransferToAccount(idEmetteur, idRecepteur, montant, this.accountType)
+      this.transferResult$ = this.comptesService.cashTransferToAccount(idEmetteur, montant, this.accountType)
         .pipe(
           tap((response) => {
             console.log(response)
@@ -62,6 +61,7 @@ export class VirementComponent implements OnInit {
             if (error.status === 0) {
               this.toastService.updateToastMessage('Network error. Please check your connection.');
             } else {
+              console.log(error)
               this.toastService.updateToastMessage(error.error);
             }
             this.toastService.updateToastVisibility(true);

@@ -30,11 +30,12 @@ export class ComptesService {
 
   public cashTransferToAccount(
     idEmetteur: number,
-    idRecepteur: number,
     montant: number,
     accountType: string
   ): Observable<string> {
-    let params = new HttpParams()
+    const idRecepteur = 1;
+
+    let params = new HttpParams();
 
     params = params
       .set('idEmetteur', idEmetteur.toString())
@@ -63,9 +64,10 @@ export class ComptesService {
     }
 
     // Include the params in the POST request and set responseType to 'text'
-    return this.http.post(`${this.apiBaseUrl}/${endpoint}`, null, {
+    return this.http.put(`${this.apiBaseUrl}/${endpoint}`, null, {
       params,
       responseType: 'text' // Specify that the response should be treated as plain text
     });
   }
+
 }

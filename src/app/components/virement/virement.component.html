@@ -7,20 +7,6 @@
 
   <form [formGroup]="virementForm" (ngSubmit)="onSubmit()" class="max-w-md mx-auto">
     <div class="mb-4">
-      <label for="idRecepteur" class="block text-gray-700 text-sm font-semibold mb-2">ID du créditeur</label>
-      <input
-        type="number"
-        id="idRecepteur"
-        formControlName="idRecepteur"
-        class="w-full px-4 py-2 rounded-lg shadow-sm
-               focus:outline-none focus:ring focus:ring-blue-200 transition duration-300
-               border border-blue-300 bg-blue-100
-               hover:border-blue-500 hover:bg-blue-200"
-        [class.form-error]="virementForm.get('idRecepteur')?.invalid && virementForm.get('idRecepteur')?.touched"
-      >
-      <div *ngIf="virementForm.get('idRecepteur')?.invalid && virementForm.get('idRecepteur')?.touched" class="text-red-600 font-bold mt-1">L'ID du créditeur requis</div>
-    </div>
-    <div class="mb-4">
       <label for="montant" class="block text-gray-700 text-sm font-semibold mb-2">Somme</label>
       <input
         type="number"
