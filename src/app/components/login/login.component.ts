@@ -58,7 +58,7 @@ export class LoginComponent {
           error: (error) => {
             // Gérez l'erreur d'authentification ici en définissant le message d'erreur.
             console.error('Erreur d\'authentification : ', error);
-            this.errorMessage = 'Nom d\'utilisateur ou mot de passe incorrect.';
+            this.errorMessage = 'Nom d\'utilisateur ou mot de passe est incorrect.';
           }
         });
     }
