@@ -1,6 +1,6 @@
 <div class="container mx-auto paddin p-4">
   <h1 class="text-3xl font-bold text-center">
-    Clients list
+    Liste des clients
   </h1>
 
   <div *ngIf="isLoading$ | async; else dataContent" class="flex justify-center items-center p-5">
@@ -42,9 +42,6 @@
         </thead>
         <tbody>
         <tr *ngFor="let client of clients$ | async" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            {{client?.id}}
-          </th>
           <td class="px-6 py-4">
             {{client?.name}}
           </td>
