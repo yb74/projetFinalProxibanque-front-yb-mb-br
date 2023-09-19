@@ -49,9 +49,6 @@ export class HeaderComponent implements OnInit {
       localStorage.removeItem('conseiller');
       localStorage.removeItem('loggedIn');
 
-      // Supprimez également le cookie de connexion
-      this.cookieService.delete('isLoggedIn');
-
       // Mettez à jour isConnected
       this.isConnected = false;
 

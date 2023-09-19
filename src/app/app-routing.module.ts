@@ -16,7 +16,7 @@ import {RapportTransactionsComponent} from "./components/rapport-transactions/ra
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'home', component: HomeComponent},
+  {path: 'home', component: HomeComponent, canActivate: [AuthService]},
   { path: 'conseillers', component: ConseillersComponent, canActivate: [AuthService] },
   {path: 'clients', component: ClientsComponent, canActivate: [AuthService]},
   {path: 'comptes', component: ComptesComponent, canActivate: [AuthService]},

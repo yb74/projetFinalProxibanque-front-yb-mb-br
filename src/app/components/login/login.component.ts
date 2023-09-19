@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
 import { FormService } from 'src/app/services/form/form.service';
 
 @Component({
@@ -20,7 +19,6 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private http: HttpClient,
-    private cookieService: CookieService,
     private service: FormService
   ) { }
 
@@ -52,8 +50,6 @@ export class LoginComponent {
             // Redirigez vers une autre page ou effectuez d'autres actions nécessaires
             this.router.navigate(['/home']);
 
-            // Après une connexion réussie, définissez un cookie pour maintenir l'état de connexion
-            this.cookieService.set('isLoggedIn', 'true');
           },
           error: (error) => {
             // Gérez l'erreur d'authentification ici en définissant le message d'erreur.
