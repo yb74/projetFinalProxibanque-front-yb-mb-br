@@ -257,20 +257,18 @@ export class ClientsComponent implements OnInit {
   }
 
   private initClientForm(data?: Client) {
+    const validators = this.isCreateMode
+      ? [Validators.required, Validators.pattern('^[0-9]{5,}$')]
+      : [];
+
     this.clientForm = this.formBuilder.group({
-      name: [data ? data.name : '', Validators.required],
-      firstName: [data ? data.firstName : '', Validators.required],
-      adress: [data ? data.adress : '', Validators.required],
-      zipCode: [
-        data ? data.zipCode : '',
-        [
-          Validators.required,
-          Validators.pattern('^[0-9]{5,}$'),
-        ],
-      ],
-      city: [data ? data.city : '', Validators.required],
-      phoneNumber: [data ? data.phoneNumber : '', Validators.required],
-      conseillerId: [data ? data.conseillerId : '', Validators.required],
+      name: [data ? data.name : '', this.isCreateMode ? Validators.required : []],
+      firstName: [data ? data.firstName : '', this.isCreateMode ? Validators.required : []],
+      adress: [data ? data.adress : '', ...validators],
+      zipCode: [data ? data.zipCode : '', ...validators],
+      city: [data ? data.city : '', ...validators],
+      phoneNumber: [data ? data.phoneNumber : '', ...validators],
+      conseillerId: [data ? data.conseillerId : '', ...validators],
     });
   }
 }
