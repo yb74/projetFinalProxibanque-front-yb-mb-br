@@ -16,7 +16,6 @@ import { ConseillersFormComponent } from './components/conseillers/conseillers-f
 import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import { CompteDetailsComponent } from './components/compte-details/compte-details.component';
 import { VirementComponent } from './components/virement/virement.component';
-import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from './services/auth/auth.service';
 import { SimulationPretComponent } from './components/simulation-pret/simulation-pret.component';
 import { RapportTransactionsComponent } from './components/rapport-transactions/rapport-transactions.component';
@@ -56,7 +55,6 @@ import { ToastComponent } from './shared/components/UI/toast/toast.component';
     HttpClientModule
   ],
   providers: [
-    CookieService,
     AuthService,
     DatePipe
   ],

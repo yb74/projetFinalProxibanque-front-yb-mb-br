@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { FormService } from 'src/app/services/form/form.service';
 
 @Component({
@@ -12,7 +11,7 @@ export class HeaderComponent implements OnInit {
   isActive = false;
   isConnected = false; // Initialisez isConnected à false par défaut
 
-  constructor(private router: Router, private cookieService: CookieService, private formService: FormService) {
+  constructor(private router: Router, private formService: FormService) {
     // Abonnez-vous à formService.isLoggedIn pour mettre à jour isConnected
     this.formService.isLoggedIn.subscribe((isLoggedIn) => {
       this.isConnected = isLoggedIn;
