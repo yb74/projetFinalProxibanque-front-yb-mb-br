@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build --dev
 
 # Expose the port on which the Angular app will run (adjust if needed)
-EXPOSE 80
+EXPOSE 4200
 
 # Start the Angular app when the container starts
 CMD ["npm", "start"]
